@@ -2,17 +2,16 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/contacts/contactsSelectors';
-import { addContact } from 'redux/contacts/contactsSlice';
+import { selectContacts } from 'redux/contacts/contactsSelectors';
 import { Form, Label, Input } from './ContactForm.styled';
 import Button from 'components/Button';
+import { addContact } from 'redux/contacts/contactsOperations';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -36,12 +35,10 @@ const ContactForm = () => {
       return toast.error(`${name} is already in contacts`);
     }
     const newContact = {
-      id: nanoid(),
       name,
       number,
     };
     dispatch(addContact(newContact));
-
     reset();
   };
 

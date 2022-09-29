@@ -1,13 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getValueFilter } from 'redux/filters/filtersSelectors';
+import { selectValueFilter } from 'redux/filters/filtersSelectors';
 import { setValueFilters } from 'redux/filters/filtersSlice';
 import { nanoid } from 'nanoid';
 import { Wrapper, Label, Input } from './Filter.styled';
 
 const Filter = () => {
   const dispatch = useDispatch();
-  const value = useSelector(getValueFilter);
+  const value = useSelector(selectValueFilter);
 
   const handleChange = e => {
     const value = e.target.value;
